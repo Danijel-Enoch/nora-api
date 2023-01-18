@@ -29,6 +29,8 @@ const clusterUrl =
 // Oracle config (mainnet)
 const pricefeeds: Record<string, string> = {
   "SOL/USD": "H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG",
+  "BTC/USD": "GVXRSBjFk6e6J3NbVPXohDJetcTjaeeuykUpbQF8UoMU",
+  "ETH/USD": "JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB",
 };
 
 function candleListToCandleRows(candles: CandleList): CandleRow[] {
@@ -64,14 +66,14 @@ async function main(
 ) {
   try {
     await client.connect();
-    Object.entries(pricefeeds).forEach((pricefeed) => {
+    Object.entries(pricefeeds).forEach(async(pricefeed) => {
       const [pricefeedName, pricefeedPk] = pricefeed;
       const pc = {
         clusterUrl,
         pricefeedName,
         pricefeedPk,
       } as PricefeedConfig;
-      collectPricefeed(pc, { host, port, password });
+      await collectPricefeed(pc, { host, port, password });
     });
   } catch (e) {
     console.error(e);
@@ -79,7 +81,7 @@ async function main(
   }
 }
 
-main(client, pricefeeds);
+main(client, pricefeeds)
 
 // Express App
 const app = express();
