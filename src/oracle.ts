@@ -40,7 +40,7 @@ export async function collectPricefeed(p: PricefeedConfig, r: RedisConfig) {
     } else {
       // Get and show the message
       const priceData = data.productPrice.get("Crypto."+p.pricefeedName)
-      await saveDataToRedis(priceData,p.pricefeedName)
+      await saveDataToRedis(priceData,p.pricefeedName+"C")
       // Call subscribe() again to get the next message
       await new Promise(resolve => setTimeout(resolve, 1000));
       
