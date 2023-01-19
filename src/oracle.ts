@@ -5,7 +5,7 @@ import { RedisConfig, RedisStore, createRedisStore } from "./redis";
 
 export async function collectPricefeed(p: PricefeedConfig, r: RedisConfig) {
   // Create a new redis store for this pricefeed
-  const store = await createRedisStore(r, p.pricefeedName);
+  const store = await createRedisStore(r, p.pricefeedName+"C");
   const pricefeedAddress = new PublicKey(p.pricefeedPk);
   const connection = new Connection(p.clusterUrl);
   const connection2 = new Connection("https://solana-mainnet.g.alchemy.com/v2/r3-VIvtGqsTO1l2Oh_0PFrmAkHit_bFO");
