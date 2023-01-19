@@ -32,6 +32,11 @@ const pricefeeds: Record<string, string> = {
   "BTC/USD": "GVXRSBjFk6e6J3NbVPXohDJetcTjaeeuykUpbQF8UoMU",
   "ETH/USD": "JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB",
 };
+const pricefeedsNEw: Record<string, string> = {
+  "SOL/USDC": "H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG",
+  "BTC/USDC": "GVXRSBjFk6e6J3NbVPXohDJetcTjaeeuykUpbQF8UoMU",
+  "ETH/USDC": "JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB",
+};
 
 function candleListToCandleRows(candles: CandleList): CandleRow[] {
   let rows = [];
@@ -122,7 +127,7 @@ app.get("/tv/symbols", async (req, res) => {
 app.get("/tv/history", async (req, res) => {
   // parse
   const marketName = req.query.symbol as string;
-  const marketPk = pricefeeds[marketName];
+  const marketPk = pricefeedsNEw[marketName];
   const resolution = resolutions[req.query.resolution as string] as number;
   let from = parseInt(req.query.from as string) * 1000;
   let to = parseInt(req.query.to as string) * 1000;
